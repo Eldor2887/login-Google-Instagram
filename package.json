@@ -2,13 +2,13 @@
   "name": "imeet",
   "version": "1.0.0",
   "description": "to make chatting app",
-  "main": "app.js",
+  "main": "index.js",
   "engines": {
     "node": "9.7.1",
     "npm": "6.0.0"
   },
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node index.js"
   },
   "author": "eldor togaymurotov",
   "license": "ISC",
