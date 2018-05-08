@@ -30,7 +30,8 @@ passport.use(
     new GoogleStrategy({
         clientID: keys.GoogleClientID,
         clientSecret: keys.GoogleClientSecret,
-        callbackURL: '/auth/google/callback'
+        callbackURL: '/auth/google/callback',
+        proxy: true
     }, (accessToken, refreshToken, profile, done) => {
         console.log('Google: ', profile);
         User.findOne({ googleId: profile.id})
@@ -80,7 +81,8 @@ passport.use(
 passport.use(new InstagramStrategy({
     clientID: keys.InstagramClientID,
     clientSecret: keys.InstagramClientSecret,
-    callbackURL: 'http://localhost:3000/auth/instagram/callback'
+    callbackURL: '/auth/instagram/callback',
+    proxy: true
 }, (accessToken, refreshToken, profile, done) => {
     console.log('Instagram: ', profile);
     User.findOne({instagramId: profile.id})
