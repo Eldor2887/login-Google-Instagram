@@ -1,11 +1,18 @@
 const express = require('express');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
+const keys = require('./config/keys');
 
 const app = express();
-
-
-app.get('/', (req, res) => {
-    res.send('Welcome to iMeet!');
-});
+app.use(cookieSession({
+    // setup how long cookie session lasts
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.CookieKey]
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+// Link authRoutes to the app
+require('./routes/authRoutes')(app);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
