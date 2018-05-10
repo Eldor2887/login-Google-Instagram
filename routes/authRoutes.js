@@ -12,7 +12,8 @@ const userSchema = new Schema({
     facebookId: String,
     instagramId: String,
     userFirstname: String,
-    userLastname: String
+    userLastname: String,
+    userProfilePicture: String
 });
 const User = mongoose.model('users',  userSchema);
 // generate cookie ID for each user
@@ -32,25 +33,22 @@ passport.use(
         clientSecret: keys.GoogleClientSecret,
         callbackURL: '/auth/google/callback',
         proxy: true
-    }, (accessToken, refreshToken, profile, done) => {
+    }, 
+    async (accessToken, refreshToken, profile, done) => {
         console.log('Google: ', profile);
-        User.findOne({ googleId: profile.id})
-        .then((existingUser) => {
+        const existingUser = await User.findOne({ googleId: profile.id})
             if (existingUser) {
                 // we already have this user with ID
                 done(null, existingUser);
-            }else {
+            }
                 // This is new user, give ID and save into database
-                new User({
+        const user = await new User({
                     googleId: profile.id,
                     userFirstname: profile.name.givenName,
-                    userLastname: profile.name.familyName
-                }).save().then((user) => {
-                    done(null, user);
-                })
-            }
-        })
-       
+                    userLastname: profile.name.familyName,
+                    userProfilePicture: profile.photos[0].value.substring(0, profile.photos[0].value.indexOf('?'))
+                }).save()
+               done(null, user);
     })
 );
 // Using facebook strategy, if user signs in with facebook account
@@ -60,21 +58,18 @@ passport.use(
         clientSecret: keys.FacebookAppSecret,
         callbackURL: '/auth/facebook/callback',
         proxy: true
-    }, (accessToken, refreshToken, profile, done) => {
+    }, 
+    async (accessToken, refreshToken, profile, done) => {
         console.log('Facebook: ', profile);
-        User.findOne({facebookId: profile.id})
-        .then((existingUser) => {
+        const existingUser = await User.findOne({facebookId: profile.id})
             if (existingUser) {
                 // we already have this user with id
                 done(null,existingUser);
-            }else {
-                new User({
-                    facebookId: profile.id
-                }).save().then((user) => {
-                    done(null,user);
-                })
             }
-        })
+        const user = await new User({
+                    facebookId: profile.id
+                }).save()
+                done(null, user);
     })
 );
 // Using Instagram strategy, if users signs in with instagram account
@@ -83,22 +78,22 @@ passport.use(new InstagramStrategy({
     clientSecret: keys.InstagramClientSecret,
     callbackURL: '/auth/instagram/callback',
     proxy: true
-}, (accessToken, refreshToken, profile, done) => {
+}, 
+async (accessToken, refreshToken, profile, done) => {
     console.log('Instagram: ', profile);
-    User.findOne({instagramId: profile.id})
-    .then((existingUser) => {
+    const existingUser = await User.findOne({instagramId: profile.id})
         if (existingUser) {
             // we already have this user with id
             done(null,existingUser);
-        }else{
-            // new user and save it into database
-            new User({
-                instagramId: profile.id
-            }).save().then((user) => {
-                done(null,user);
-            })
         }
-    })
+            // new user and save it into database
+    const user = await new User({
+                instagramId: profile.id,
+                userFirstname: profile.name.givenName,
+                userLastname: profile.name.familyName,
+                userProfilePicture: profile._json.data.profile_picture
+            }).save()
+           done(null, user);
 }))
 // Link routes to the app
 module.exports = (app) => {
@@ -112,16 +107,26 @@ module.exports = (app) => {
     app.get('/auth/instagram', passport.authenticate('instagram'));
 
     // Callback route handlers
-    app.get('/auth/google/callback', passport.authenticate('google'));
-    app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-        successRedirect: '/profile',
-        failureRedirect: '/'
-    }));
-    app.get('/auth/instagram/callback', passport.authenticate('instagram'));
+    app.get('/auth/google/callback', 
+    passport.authenticate('google'),
+    (req, res) => {
+        res.redirect('/profile');
+    });
+
+    app.get('/auth/facebook/callback', 
+    passport.authenticate('facebook'),
+    (req, res) => {
+    res.redirect('/profile');
+   });
+
+    app.get('/auth/instagram/callback', 
+        passport.authenticate('instagram'),(req, res) => {
+        res.redirect('/profile');
+    });
     // logout route handler
     app.get('/api/logout', (req, res) => {
         req.logout();
-        res.send(req.user);
+        res.redirect('/');
     });
     // route handle to test req.user
     app.get('/api/current_user', (req, res) => {
