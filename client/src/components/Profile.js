@@ -11,13 +11,15 @@ class Profile extends React.Component {
             default:
             return (
             <div className="row">
-            <div className="col-sm-6">
+            <div className="col-sm-4">
                 <img className="img-responsive img-circle" src={this.props.auth.userProfilePicture} alt="user"/>
+                <h3 className="userfullname">{this.props.auth.userFullname}</h3>
             </div>
-            <div className="col-sm-6">
+            <div className="col-sm-4">
             <h2>Profile</h2>
             <h3>Firstname: {this.props.auth.userFirstname}</h3>
             <h3>Lastname: {this.props.auth.userLastname}</h3>
+            <h3>Email: {this.props.auth.userEmail}</h3>
             </div>
             </div>
             );

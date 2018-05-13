@@ -11,10 +11,11 @@ const userSchema = new Schema({
     googleId: String,
     facebookId: String,
     instagramId: String,
+    userFullname: String,
     userFirstname: String,
     userLastname: String,
     userProfilePicture: String,
-    email: String,
+    userEmail: String,
     password: String
 });
 const User = mongoose.model('users',  userSchema);
@@ -46,8 +47,10 @@ passport.use(
                 // This is new user, give ID and save into database
         const user = await new User({
                     googleId: profile.id,
+                    userFullname: profile.displayName,
                     userFirstname: profile.name.givenName,
                     userLastname: profile.name.familyName,
+                    userEmail: profile.emails[0].value,
                     userProfilePicture: profile.photos[0].value.substring(0, profile.photos[0].value.indexOf('?'))
                 }).save()
                done(null, user);
@@ -91,6 +94,7 @@ async (accessToken, refreshToken, profile, done) => {
             // new user and save it into database
     const user = await new User({
                 instagramId: profile.id,
+                userFullname: profile.displayName,
                 userFirstname: profile.name.givenName,
                 userLastname: profile.name.familyName,
                 userProfilePicture: profile._json.data.profile_picture
@@ -104,7 +108,9 @@ module.exports = (app) => {
         scope: ['profile', 'email']
     }));
     // Route handler for Facebook auth
-    app.get('/auth/facebook', passport.authenticate('facebook'));
+    app.get('/auth/facebook', passport.authenticate('facebook', {
+        scope: ['profile', 'email']
+    }));
     // Route handler for Instagram auth
     app.get('/auth/instagram', passport.authenticate('instagram'));
 

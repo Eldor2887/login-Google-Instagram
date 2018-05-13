@@ -3,13 +3,7 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const keys = require('./config/keys');
 
-const bodyParser = require('body-parser');
-
 const app = express();
-
-const users = require('./routes/users');
-app.use(bodyParser.json());
-app.use('/api/users', users);
 
 app.use(cookieSession({
     // setup how long cookie session lasts

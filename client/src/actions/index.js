@@ -7,9 +7,4 @@ export const fetchUser = () => async dispatch => {
     dispatch({ type: FETCH_USER, payload: res.data });
 };
 
-export function userSignupRequest(userData){
-    return dispatch => {
-        return axios.post('/api/users', userData);
-    }
-}
 

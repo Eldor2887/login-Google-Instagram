@@ -23,29 +23,12 @@ class Homepage extends React.Component {
                         href="/auth/instagram">
                         Login With Instagram <i className="fa fa-instagram right"></i></a>
                     </div>
+                    <div className="form-group col-md-4 col-md-offset-4">
+                        <a className="form-control btn btn-primary btn-lg" 
+                        href="/auth/facebook">
+                        Login With Facebook <i className="fa fa-facebook right"></i></a>
                     </div>
-                    </form>
-                    <p id="divider">- Or -</p>
-                    <form>
-                        <div className="row">
-                        <div className="form-group col-md-4 col-md-offset-4">
-                        <input type="email" name="email" 
-                        className="form-control" 
-                        placeholder="Enter email address"/>
-                        </div>
-                        <div className="form-group col-md-4 col-md-offset-4">
-                        <input type="password" name="password"
-                        className="form-control"
-                        placeholder="Enter password"/>
-                        </div>
-                        <div className="form-group col-md-4 col-md-offset-4">
-                        <input type="submit" value="Login" 
-                        className="form-control btn btn-danger"/>
-                        </div>
-                        <div className="form-group col-md-4 col-md-offset-4">
-                        <a href="/signup">Need an Account?</a>
-                        </div>
-                        </div>
+                    </div>
                     </form>
                 </div>
             );
