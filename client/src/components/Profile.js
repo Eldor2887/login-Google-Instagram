@@ -12,7 +12,7 @@ class Profile extends React.Component {
             return (
             <div className="row">
             <div className="col-sm-6">
-                <img className="img-responsive img-circle" src={this.props.auth.userProfilePicture}/>
+                <img className="img-responsive img-circle" src={this.props.auth.userProfilePicture} alt="user"/>
             </div>
             <div className="col-sm-6">
             <h2>Profile</h2>

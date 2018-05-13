@@ -13,7 +13,9 @@ const userSchema = new Schema({
     instagramId: String,
     userFirstname: String,
     userLastname: String,
-    userProfilePicture: String
+    userProfilePicture: String,
+    email: String,
+    password: String
 });
 const User = mongoose.model('users',  userSchema);
 // generate cookie ID for each user
@@ -94,7 +96,7 @@ async (accessToken, refreshToken, profile, done) => {
                 userProfilePicture: profile._json.data.profile_picture
             }).save()
            done(null, user);
-}))
+}));
 // Link routes to the app
 module.exports = (app) => {
     // Route handler for google auth
@@ -132,6 +134,7 @@ module.exports = (app) => {
     app.get('/api/current_user', (req, res) => {
         res.send(req.user);
     });
+   
 
 };
 
