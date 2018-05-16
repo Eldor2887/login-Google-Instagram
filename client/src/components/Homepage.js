@@ -9,32 +9,30 @@ class Homepage extends React.Component {
 
             case false:
             return (
-                <div className="container">
-                    <h2>iMeet Online Dating</h2>
-                    <form>
+                <div className="container-fluid">
+                    <h2>iWatch Video Streaming</h2>
                     <div className="row">
-                    <div className="form-group col-md-4 col-md-offset-4">
-                        <a className="form-control btn btn-primary btn-lg" 
+                    <div className="col-sm-4 col-sm-offset-4">
+                        <a className="btn btn-danger" 
                         href="/auth/google">
-                        Login With Google <i className="fa fa-google right"></i></a>
+                        <i className="fa fa-google"> Login With Google </i></a>
                     </div>
-                    <div className="form-group col-md-4 col-md-offset-4">
-                        <a className="form-control btn btn-primary btn-lg" 
+                    <div className="col-sm-4 col-sm-offset-4">
+                        <a className="btn btn-warning" 
                         href="/auth/instagram">
-                        Login With Instagram <i className="fa fa-instagram right"></i></a>
+                        <i className="fa fa-instagram"> Login With Instagram</i></a>
                     </div>
-                    <div className="form-group col-md-4 col-md-offset-4">
-                        <a className="form-control btn btn-primary btn-lg" 
+                    <div className="col-sm-4 col-sm-offset-4">
+                        <a className="btn btn-primary" 
                         href="/auth/facebook">
-                        Login With Facebook <i className="fa fa-facebook right"></i></a>
+                        <i className="fa fa-facebook"> Login With Facebook</i></a>
                     </div>
                     </div>
-                    </form>
                 </div>
             );
             default:
             return (<div>
-            <h2>Welcome to iMeet</h2>
+            <h2>Welcome to iWatch</h2>
             <p>You are logged in</p>
             </div>);
         }

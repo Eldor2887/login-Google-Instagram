@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import Payments from './Payments';
 
 class Navbar extends React.Component {
     renderContent(){
@@ -12,7 +13,12 @@ class Navbar extends React.Component {
             return;
 
             default:
-            return <li><a href="/api/logout">Logout</a></li>;
+            return [
+            <li key="1"><a><Payments/></a></li>,
+            <li key="2"><a id="days"><button className="btn btn-info">
+            {this.props.auth.credits} days</button></a></li>,
+            <li key="3"><a href="/api/logout"><button className="btn btn-danger">Logout</button></a></li>
+        ]
         }
     }
     render() {
@@ -26,12 +32,12 @@ class Navbar extends React.Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>                        
             </button>
-                <a className="navbar-brand" href="/">iMeet</a>
+                <a className="navbar-brand" href="/"><i className="fa fa-video-camera"></i></a>
             </div>
             <div className="collapse navbar-collapse" id="myNavbar">
                 <ul className="nav navbar-nav">
-                   <li><a href="/">Home</a></li>
-                   <li><a href="/profile">Profile</a></li>
+                   <li><a href="/"><i className="fa fa-home"></i></a></li>
+                   <li><a href="/dashboard"><i className="fa fa-address-card"></i></a></li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
                     {this.renderContent()}

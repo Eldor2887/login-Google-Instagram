@@ -9,6 +9,7 @@ const keys = require('../config/keys');
 // Create User model and pass it thru schema
 const userSchema = new Schema({
     googleId: String,
+    credits: { type: Number, default: 0},
     facebookId: String,
     instagramId: String,
     userFullname: String,
@@ -108,9 +109,7 @@ module.exports = (app) => {
         scope: ['profile', 'email']
     }));
     // Route handler for Facebook auth
-    app.get('/auth/facebook', passport.authenticate('facebook', {
-        scope: ['profile', 'email']
-    }));
+    app.get('/auth/facebook', passport.authenticate('facebook'));
     // Route handler for Instagram auth
     app.get('/auth/instagram', passport.authenticate('instagram'));
 
@@ -118,18 +117,18 @@ module.exports = (app) => {
     app.get('/auth/google/callback', 
     passport.authenticate('google'),
     (req, res) => {
-        res.redirect('/profile');
+        res.redirect('/dashboard');
     });
 
     app.get('/auth/facebook/callback', 
     passport.authenticate('facebook'),
     (req, res) => {
-    res.redirect('/profile');
+    res.redirect('/dashboard');
    });
 
     app.get('/auth/instagram/callback', 
         passport.authenticate('instagram'),(req, res) => {
-        res.redirect('/profile');
+        res.redirect('/dashboard');
     });
     // logout route handler
     app.get('/api/logout', (req, res) => {

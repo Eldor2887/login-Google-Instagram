@@ -1,3 +1,7 @@
+body {
+    background-color: black;
+    color: antiquewhite;
+}
 h2 {
     text-align: center;
 }
@@ -6,4 +10,19 @@ h2 {
 }
 .userfullname{
     text-align: center;
+}
+#days {
+    color: red;
+}
+/* .fa {
+    font-size: 30px;
+} */
+.fa-video-camera {
+    color: red;
+}
+.row {
+    width: 100%;
+}
+.col-sm-4 {
+    margin-top: 10px;
 }
