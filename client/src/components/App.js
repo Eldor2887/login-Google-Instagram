@@ -6,6 +6,7 @@ import * as actions from '../actions';
 import Navbar from "./Navbar";
 import Homepage from './Homepage';
 import Dashboard from './Dashboard';
+import Videos from './Videos';
 
 class App extends React.Component {
     componentDidMount(){
@@ -19,6 +20,7 @@ class App extends React.Component {
                     <Navbar/>
                     <Route exact path="/" component={Homepage}/>
                     <Route exact path="/dashboard" component={Dashboard}/>
+                    <Route exact path="/videos" component={Videos}/>
                 </div>
             </BrowserRouter>
         </div>

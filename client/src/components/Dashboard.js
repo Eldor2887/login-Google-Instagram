@@ -11,12 +11,14 @@ class Dashboard extends React.Component {
             default:
             return (
             <div className="row">
-            <div className="col-sm-2">
+            <div className="col-sm-4">
             <img className="img-responsive img-circle" src={this.props.auth.userProfilePicture} alt="user"/>
             <h3 className="userfullname">{this.props.auth.userFullname}</h3>
             </div>
-            <div className="col-sm-8">
-            
+            <div className="col-sm-2"></div>
+            <div className="col-sm-4">
+            <h3>Member since </h3>
+            <h3>Premium membership: {this.props.auth.credits} days left</h3>
             </div>
             </div>
             );

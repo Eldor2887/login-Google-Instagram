@@ -10,7 +10,7 @@ class Homepage extends React.Component {
             case false:
             return (
                 <div className="container-fluid">
-                    <h2>iWatch Video Streaming</h2>
+                    <h2>World Video Streaming</h2>
                     <div className="row">
                     <div className="col-sm-4 col-sm-offset-4">
                         <a className="btn btn-danger" 
@@ -33,6 +33,7 @@ class Homepage extends React.Component {
             default:
             return (<div>
             <h2>Welcome to iWatch</h2>
+            <h2>Online Video Streaming</h2>
             <p>You are logged in</p>
             </div>);
         }

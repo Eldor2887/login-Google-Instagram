@@ -32,12 +32,15 @@ class Navbar extends React.Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>                        
             </button>
-                <a className="navbar-brand" href="/"><i className="fa fa-video-camera"></i></a>
+                <a className="navbar-brand" href="/">
+                <span id="brand">WorldMovie <i className="fa fa-play"></i></span>
+                </a>
             </div>
             <div className="collapse navbar-collapse" id="myNavbar">
                 <ul className="nav navbar-nav">
                    <li><a href="/"><i className="fa fa-home"></i></a></li>
                    <li><a href="/dashboard"><i className="fa fa-address-card"></i></a></li>
+                   <li><a href="/videos"><i className="fa fa-film"></i></a></li>
                 </ul>
                 <ul className="nav navbar-nav navbar-right">
                     {this.renderContent()}
