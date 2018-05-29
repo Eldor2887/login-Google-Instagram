@@ -5,7 +5,14 @@ class Homepage extends React.Component {
     renderBody(){
         switch(this.props.auth){
             case null:
-            return;
+            return (
+            <div className="container-fluid">
+                <div className="row">
+                       <div className="col-md-4 col-md-offset-4">
+                           <i className="fa fa-spinner fa-spin"></i>
+                        </div>
+                </div>
+            </div>);
 
             case false:
             return (
@@ -32,7 +39,7 @@ class Homepage extends React.Component {
             );
             default:
             return (<div>
-            <h2>Welcome to iWatch</h2>
+            <h2>Welcome to World Videos</h2>
             <h2>Online Video Streaming</h2>
             <p>You are logged in</p>
             </div>);

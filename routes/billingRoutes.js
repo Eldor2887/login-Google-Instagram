@@ -7,7 +7,7 @@ module.exports = app => {
         const charge = await stripe.charges.create({
             amount: 500,
             currency: 'usd',
-            description: '$5 for unlimited videos',
+            description: '$5/month for unlimited videos',
             source: req.body.id
         });
         req.user.credits += 30;

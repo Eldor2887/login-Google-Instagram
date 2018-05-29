@@ -5,7 +5,14 @@ class Dashboard extends React.Component {
     renderInfo(){
         switch(this.props.auth){
             case null:
-            return <p>Loading....</p>;
+           return (
+            <div className="container-fluid">
+                <div className="row">
+                       <div className="col-md-4 col-md-offset-4">
+                           <i className="fa fa-spinner fa-spin"></i>
+                        </div>
+                </div>
+            </div>);
             case false:
             return <p>You are not logged in. Please <a href="/">Login</a></p>;
             default:
